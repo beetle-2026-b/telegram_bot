@@ -33,8 +33,9 @@ def replacer(match):
 @bot.message_handler(func=lambda message: message.text is not None)
 def handle_message(message):
     text = message.text
-    # Только "не" (и повторы типа "нене"), и только если после него НЕТ пробела
-    pattern = r"\b(?:не)+(?!\s)"
+    # да / нет — обычные отдельные слова
+    # не — отдельное слово И только если после него нет пробела
+    pattern = r'(?<![а-яА-ЯёЁa-zA-Z])(да|нет|не(?!\s))(?![а-яА-ЯёЁa-zA-Z])'
     if re.search(pattern, text, flags=re.IGNORECASE):
         new_text = re.sub(pattern, replacer, text, flags=re.IGNORECASE)
         bot.reply_to(message, new_text)

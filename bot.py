@@ -3,8 +3,10 @@ import re
 from threading import Thread
 from flask import Flask
 import telebot
+from dotenv import load_dotenv
 
-TOKEN = "8594308908:AAFR1aqLGGg80DxsVT69BFqz64mbcju0jrg"
+load_dotenv()
+TOKEN = os.getenv("BOT_TOKEN")
 bot = telebot.TeleBot(TOKEN)
 
 # --- Крошечный веб-сервер для Render и будильника ---
